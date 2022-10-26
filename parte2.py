@@ -6,7 +6,8 @@ def iniciador (matrix):
         lst = []
         lst.append(i)
         lst = adyacentes(matrix, lst, i)
-        print(lst)
+        if lst == True:
+            return lst
         lstF.append(lst)
     return lstF
 
@@ -22,24 +23,29 @@ def iniciador (matrix):
 def adyacentes(matrix, lst, i):
     for j in range(0, len(matrix[i])):
         if (matrix[i][j] != 0 and matrix[i][j] != -1):
-            if j not in lst:
-                lst.append(j)
-                lst = adyacentes(matrix, lst, j)
+            print(lst)
+            if lst == True:
+                return True
             else:
-                lst.append(j)
+                if j != lst[0]:   
+                    if j not in lst:
+                        lst.append(j)
+                        lst = adyacentes(matrix, lst, j)
+                else:
+                    return True
         
     return lst
 
 
 
-lst = [[0,90,-1,-1,-1],
-        [15,0,-1,48,-1],
-        [-1,-1,0,-1,39],
-        [78,-1,-1,0,-1],
+lst = [[0,90,80,-1,-1],
+        [15,0,69,48,-1],
+        [91,-1,0,12,39],
+        [78,-1,-1,0,36],
         [-1,-1,-1,-1,0]]
 
-lst1 = [[0,90,80],
+lst1 = [[0,90,-1],
         [-1,0,69],
         [-1,-1,0]]
 
-print(iniciador(lst))
+print(iniciador(lst1))
