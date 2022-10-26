@@ -15,14 +15,10 @@ def bellman(matriz, ini):
     for key in matriz:
         for adya in matriz[key]:
             costo = data[key]['costo'] + matriz[key][adya]
-            if costo < data[adya]['costo']:
+            if(costo < data[adya]['costo']):
                 data[adya]['costo'] = costo
-                if data[adya]['costo'] == infi:
-                    data[adya]['anterior'] = data[key]['anterior']
-                    data[adya]['anterior'] += "-"+str(adya)
-                else:
-                    data[adya]['anterior'] = data[key]['anterior']
-                    data[adya]['anterior'] += "-"+str(adya)
+                data[adya]['anterior'] = data[key]['anterior']
+                data[adya]['anterior'] += "-"+str(adya)
     return data
 
         

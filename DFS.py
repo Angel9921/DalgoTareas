@@ -1,16 +1,20 @@
+import sys
 
 def iniciador ():
     lstF = []
     matrix = lector()
+    
+    #print(matrix)
     for i in range(0, len(matrix[0])):
         v = i
         lst = []
         lst.append(i)
         lst = adyacentes(matrix, lst, i)
         if lst == True:
+            print(lst)
             return lst
         lstF.append(lst)
-    return lstF
+    print(lstF)
 
 def lector()->list:
     matriz = []
@@ -21,7 +25,7 @@ def lector()->list:
         j = 0
         lst = []
         while(j < cont):
-            lst.append(linea[j])
+            lst.append(int(linea[j]))
                 #sys.stdout.writelines(linea[j]+" ")
             j+=1
         matriz.append(lst)
@@ -32,25 +36,16 @@ def lector()->list:
     return matriz
 
 
-# def booleanLst(lstF, v):
-#     b = False
-#     for i in range(0, len(lstF)):
-#         if v in lstF[i]:
-#             b = True
-#     return b
-
-
 def adyacentes(matrix, lst, i):
     for j in range(0, len(matrix[i])):
         if (matrix[i][j] != 0 and matrix[i][j] != -1):
-            print(lst)
+            #print(lst)
             if lst == True:
                 return True
             else:
-                if j != lst[0]:   
-                    if j not in lst:
-                        lst.append(j)
-                        lst = adyacentes(matrix, lst, j)
+                if j != lst[0] and j not in lst: 
+                    lst.append(j)
+                    lst = adyacentes(matrix, lst, j)
                 else:
                     return True
         
@@ -68,4 +63,4 @@ lst1 = [[0,90,-1],
         [-1,0,69],
         [-1,-1,0]]
 
-print(iniciador(lst1))
+iniciador()
