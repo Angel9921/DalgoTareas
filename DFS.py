@@ -1,6 +1,7 @@
 
-def iniciador (matrix):
+def iniciador ():
     lstF = []
+    matrix = lector()
     for i in range(0, len(matrix[0])):
         v = i
         lst = []
@@ -10,6 +11,25 @@ def iniciador (matrix):
             return lst
         lstF.append(lst)
     return lstF
+
+def lector()->list:
+    matriz = []
+    linea = list(map(str, sys.stdin.readline().split("	")))
+    cont = len(linea)
+    i = 0
+    while(i < cont):
+        j = 0
+        lst = []
+        while(j < cont):
+            lst.append(linea[j])
+                #sys.stdout.writelines(linea[j]+" ")
+            j+=1
+        matriz.append(lst)
+        #sys.stdout.writelines("\n")
+        i += 1
+        linea = list(map(str, sys.stdin.readline().split("	")))
+
+    return matriz
 
 
 # def booleanLst(lstF, v):
