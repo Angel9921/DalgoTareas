@@ -4,8 +4,10 @@ import sys
 
 def iniciador(lst):
     matriz = lectorLst(lst)
-    solu = dijkstra(matriz, 0)
-    return solu
+    for i in matriz:
+        solu = dijkstra(matriz, i)
+        print("Para vertice iniciando en " + str(i) + " los costos caminos minimos son: " + str(solu)+ "\n")
+    
 
 
 
@@ -20,7 +22,7 @@ def lectorLst(lst):
     return matriz
 
 
-def lector():
+def lectorTxt():
     matriz = {}
     linea = list(map(str, sys.stdin.readline().split("	")))
     cont = len(linea)
@@ -50,7 +52,6 @@ def dijkstra(matriz, ini):
     data = matrizPesos(matriz)
     data[ini]['costo'] = 0
     data[ini]['anterior'] = str(0)
-    print(data)
     visitados = []
     temp = ini
     for i in range(0,len(data)-1):
@@ -61,13 +62,10 @@ def dijkstra(matriz, ini):
                 if j not in visitados:
                     costo = data[temp]['costo'] + matriz[temp][j]
                     if costo < data[j]['costo']:
-                        print(costo)
                         data[j]['costo'] = costo
-                        print(data[temp]['anterior'])
                         var = data[temp]['anterior']
                         data[j]['anterior'] = data[temp]['anterior']
                         data[j]['anterior'] += "-"+str(j)
-                        print(data[j]['anterior'])
                     heappush(min_heap,(data[j]['costo'], j))
         heapify(min_heap)
         temp = min_heap[0][1]
