@@ -1,4 +1,11 @@
 # DalgoTareas
+Integrantes:
+
+Luis Angel Angarita Cova 201910393
+Carlos Pinto Rodrigez 201616667
+Michael Dylan Blanquicett Carvajal 202014156
+
+
 Pasos para ejecutar los codigos de tarea 5.
 
 1. Importar el repositorio o descargar la carpeta .zip
