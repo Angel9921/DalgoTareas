@@ -2,8 +2,8 @@
 from heapq import heapify, heappush
 import sys
 
-def iniciador(lst):
-    matriz = lectorLst(lst)
+def iniciador():
+    matriz = lector()
     for i in matriz:
         solu = dijkstra(matriz, i)
         print("Para vertice iniciando en " + str(i) + " los costos caminos minimos son: " + str(solu)+ "\n")
@@ -11,37 +11,27 @@ def iniciador(lst):
 
 
 
-def lectorLst(lst):
-    matriz = {}
-    for i in range(0, len(lst)):
-        dicc = {}
-        for j in range(0, len(lst[i])):
-            if lst[i][j] > 0:
-                dicc[j] = lst[i][j]
-        matriz[i] = dicc
-    return matriz
-
-
-def lectorTxt():
+def lector()->dict:
     matriz = {}
     linea = list(map(str, sys.stdin.readline().split("	")))
     cont = len(linea)
     i = 0
-    while(cont != 0):
-        cont-=1
+    while(i < cont):
         j = 0
         dicc = {}
-        while(j < len(linea)):
-            if linea[j] > 0:
-                dicc[j] = linea[j]
+        while(j < cont):
+            if int(linea[j]) > 0:
+                dicc[int(j)] = int(linea[j])
+                #sys.stdout.writelines(linea[j]+" ")
             j+=1
-        matriz[i] = dicc
+        matriz[int(i)] = dicc
+        #sys.stdout.writelines("\n")
         i += 1
         linea = list(map(str, sys.stdin.readline().split("	")))
-    return matriz
-    
 
-def matrizPesos(matriz):
+    return matriz
+
+def matriz_pesos(matriz):
     inf = sys.maxsize
     dicc = {}
     for i in matriz:
@@ -49,9 +39,9 @@ def matrizPesos(matriz):
     return dicc
 
 def dijkstra(matriz, ini):
-    data = matrizPesos(matriz)
+    data = matriz_pesos(matriz)
     data[ini]['costo'] = 0
-    data[ini]['anterior'] = str(0)
+    data[ini]['anterior'] = str(ini)
     visitados = []
     temp = ini
     for i in range(0,len(data)-1):
@@ -72,13 +62,5 @@ def dijkstra(matriz, ini):
     return data
 
 
-
-
-lst = [[0,90,80,-1,-1],
-        [15,0,69,48,-1],
-        [91,-1,0,12,39],
-        [78,-1,-1,0,36],
-        [26,12,39,33,0]]
-
-print(iniciador(lst))
+iniciador()
 

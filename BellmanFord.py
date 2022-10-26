@@ -1,7 +1,7 @@
 import sys
 
-def iniciador(lst):
-    matriz = lectorLst(lst)
+def iniciador():
+    matriz = lector()
     for i in matriz:
         solu = bellman(matriz, i)
         print("vertice "+ str(i) + " = " + str(solu))
@@ -9,7 +9,7 @@ def iniciador(lst):
 
 def bellman(matriz, ini):
     infi = sys.maxsize    
-    data = matrizPesos(matriz)
+    data = matriz_pesos(matriz)
     data[ini]['costo'] = 0
     data[ini]['anterior'] = str(ini)
     for key in matriz:
@@ -21,7 +21,6 @@ def bellman(matriz, ini):
                     data[adya]['anterior'] = data[key]['anterior']
                     data[adya]['anterior'] += "-"+str(adya)
                 else:
-                    data[adya]['anterior'] = ""
                     data[adya]['anterior'] = data[key]['anterior']
                     data[adya]['anterior'] += "-"+str(adya)
     return data
@@ -30,18 +29,28 @@ def bellman(matriz, ini):
 
 
 
-def lectorLst(lst):
+def lector()->dict:
     matriz = {}
-    for i in range(0, len(lst)):
+    linea = list(map(str, sys.stdin.readline().split("	")))
+    cont = len(linea)
+    i = 0
+    while(i < cont):
+        j = 0
         dicc = {}
-        for j in range(0, len(lst[i])):
-            if lst[i][j] != 0 and lst[i][j] != -1:
-                dicc[j] = lst[i][j]
-        matriz[i] = dicc
+        while(j < cont):
+            if int(linea[j]) > 0:
+                dicc[int(j)] = int(linea[j])
+                #sys.stdout.writelines(linea[j]+" ")
+            j+=1
+        matriz[int(i)] = dicc
+        #sys.stdout.writelines("\n")
+        i += 1
+        linea = list(map(str, sys.stdin.readline().split("	")))
+
     return matriz
 
 
-def matrizPesos(matriz):
+def matriz_pesos(matriz):
     inf = sys.maxsize
     dicc = {}
     for i in matriz:
@@ -49,17 +58,4 @@ def matrizPesos(matriz):
     return dicc
 
 
-lst = [[0,6,4,5,0,0],
-        [-1,0,-1,-1,-2,-1],
-        [91,-1,0,12,39,],
-        [78,-1,-1,0,36,],
-        [26,12,39,33,0,],
-        [-1,-1,-1,-1,-1,0]]
-
-lst2 = [[0,90,80,-1,-1],
-        [15,0,69,48,-1],
-        [91,-1,0,12,39],
-        [78,-1,-1,0,36],
-        [26,12,39,33,0]]
-
-print(iniciador(lst2))
+iniciador()
